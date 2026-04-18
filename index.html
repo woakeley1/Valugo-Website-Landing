@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Valugo — Transform the way students think about money</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; font-family: 'Sora', sans-serif; background: #eef3f1; }
+
+  .page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .hero {
+    background: linear-gradient(130deg, #076b5f 0%, #0d9980 35%, #1bbfa0 65%, #4ddab8 100%);
+    border-radius: 24px;
+    padding: 48px;
+    max-width: 960px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(7,107,95,0.25);
+  }
+
+  .bokeh { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .bokeh span {
+    position: absolute; border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+    animation: float 8s ease-in-out infinite;
+  }
+  .bokeh span:nth-child(1){width:120px;height:120px;top:5%;left:55%;animation-delay:0s;}
+  .bokeh span:nth-child(2){width:70px;height:70px;top:55%;left:72%;animation-delay:1.5s;}
+  .bokeh span:nth-child(3){width:180px;height:180px;top:-10%;left:78%;animation-delay:3s;opacity:0.04;}
+  .bokeh span:nth-child(4){width:50px;height:50px;top:75%;left:48%;animation-delay:2s;}
+  .bokeh span:nth-child(5){width:90px;height:90px;top:30%;left:88%;animation-delay:4s;}
+  .bokeh span:nth-child(6){width:40px;height:40px;top:85%;left:65%;animation-delay:1s;}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+  .left { flex: 1; z-index: 1; }
+
+  .logo { margin-bottom: 30px; }
+  .logo img { height: 46px; width: auto; }
+
+  .headline {
+    color: #fff;
+    font-size: clamp(18px, 2.8vw, 26px);
+    font-weight: 800;
+    line-height: 1.35;
+    margin-bottom: 22px;
+    letter-spacing: -0.3px;
+  }
+
+  .bullets { list-style: none; margin-bottom: 26px; }
+  .bullets li {
+    color: rgba(255,255,255,0.92);
+    font-size: 14px;
+    margin-bottom: 11px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+  }
+  .check { color: #FFD32A; font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+  .tagline { color: rgba(255,255,255,0.82); font-size: 13px; font-weight: 600; }
+
+  .card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px 26px;
+    min-width: 280px;
+    max-width: 300px;
+    z-index: 1;
+    flex-shrink: 0;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  }
+  .card h2 { font-size: 21px; font-weight: 800; color: #111; margin-bottom: 5px; }
+  .card .sub { font-size: 13px; color: #777; margin-bottom: 20px; }
+
+  .card input[type=email] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: 'Sora', sans-serif;
+    margin-bottom: 10px;
+    color: #222;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .card input[type=email]:focus { border-color: #1bbfa0; }
+  .card input[type=email]::placeholder { color: #bbb; }
+
+  .card button {
+    width: 100%;
+    padding: 13px;
+    background: #FFD32A;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Sora', sans-serif;
+    color: #111;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .card button:hover { background: #f5c800; }
+  .card button:active { transform: scale(0.98); }
+
+  .privacy { font-size: 11px; color: #aaa; margin-top: 12px; }
+  .copyright { font-size: 11px; color: #ccc; margin-top: 5px; }
+  .error-msg { display:none; color:#c0392b; font-size:12px; margin-bottom:8px; }
+  .success {
+    display: none;
+    background: #e6faf5;
+    border: 1.5px solid #1bbfa0;
+    border-radius: 10px;
+    padding: 12px;
+    color: #076b5f;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 14px;
+  }
+
+  @media (max-width: 680px) {
+    .hero { flex-direction: column; padding: 36px 24px; gap: 32px; }
+    .card { min-width: unset; max-width: 100%; width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <div class="bokeh">
+      <span></span><span></span><span></span>
+      <span></span><span></span><span></span>
+    </div>
+
+    <div class="left">
+      <div class="logo">
+        <img src="logo.jpeg" alt="Valugo" />
+      </div>
+      <p class="headline">Transform the way students think about money.</p>
+      <ul class="bullets">
+        <li><span class="check">✓</span> Gain emotional clarity around your finances</li>
+        <li><span class="check">✓</span> Understand your spending habits on a deeper level</li>
+        <li><span class="check">✓</span> Leverage AI-powered insights to make smarter decisions</li>
+        <li><span class="check">✓</span> Built specifically for student life</li>
+      </ul>
+      <p class="tagline">Be the first to try Valugo and take control of your money.</p>
+    </div>
+
+    <div class="card">
+      <h2>Join the Waitlist</h2>
+      <p class="sub">Get early access to Valugo!</p>
+      <input type="email" id="emailInput" placeholder="Enter your email" />
+      <p class="error-msg" id="errMsg">Please enter a valid email.</p>
+      <button onclick="handleSignup()">Join the Waitlist</button>
+      <p class="privacy">Privacy assured. No spam, ever.</p>
+      <p class="copyright">© 2025 Valugo</p>
+      <div class="success" id="successMsg">🎉 You're on the list! We'll be in touch soon.</div>
+    </div>
+  </div>
+</div>
+<script>
+  function handleSignup() {
+    const email = document.getElementById('emailInput').value.trim();
+    const err = document.getElementById('errMsg');
+    const success = document.getElementById('successMsg');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      err.style.display = 'block';
+      document.getElementById('emailInput').style.borderColor = '#e74c3c';
+      return;
+    }
+    err.style.display = 'none';
+    document.getElementById('emailInput').style.borderColor = '#1bbfa0';
+    document.getElementById('emailInput').value = '';
+    success.style.display = 'block';
+  }
+  document.getElementById('emailInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') handleSignup();
+  });
+</script>
+</body>
+</html>
